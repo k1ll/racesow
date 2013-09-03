@@ -4,6 +4,7 @@ CXX?=g++
 AR?=ar
 LOCALBASE?=/usr/local
 FREETYPE_INC?=$(shell freetype-config --cflags)
+ARCH?=i386
 
 CXXFLAGS:=$(subst -I../libsrcs/,-I../../../libsrcs/,$(CXXFLAGS))
 CXXFLAGS+=-DSTATIC_LIB -IInclude
@@ -20,8 +21,8 @@ else
 	CXXFLAGS += -O2
 endif
 
-BUILDDIR=Build/obj
-BINDIR=lib
+BUILDDIR=Build/obj_$(ARCH)
+BINDIR=lib/$(ARCH)
 
 LIBROCKET=$(BINDIR)/libRocketWSW.a	# just this
 LIBCORE=libRocketCore.a

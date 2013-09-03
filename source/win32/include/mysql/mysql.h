@@ -55,7 +55,11 @@ typedef char my_bool;
 #if !defined(__WIN__)
 #define STDCALL
 #else
+#ifdef __MINGW32__
+#define STDCALL __cdecl
+#else
 #define STDCALL __stdcall
+#endif
 #endif
 
 #ifndef my_socket_defined
