@@ -124,14 +124,14 @@ endif
 LIBROCKET_DIR=../libsrcs/libRocket/libRocket
 LIBROCKET_MAKEFILE=Makefile.warsow
 LIBROCKET_INC=$(LIBROCKET_DIR)/Include
-LIBROCKET_LIB=$(LIBROCKET_DIR)/lib/libRocketWSW.a
+LIBROCKET_LIB=$(LIBROCKET_DIR)/lib/$(ARCH)/libRocketWSW.a
 
 CFLAGS_ROCKET=-DSTATIC_LIB -I$(LIBROCKET_INC) -I$(ANGELSCRIPT_INC)
 # add the base of ui to inclusions
 CFLAGS_ROCKET+=-Iui
 
 # static link to custombuilt lib
-LDFLAGS_ROCKET=-L$(LIBROCKET_DIR)/lib -lRocketWSW -lfreetype
+LDFLAGS_ROCKET=-L$(LIBROCKET_DIR)/lib/$(ARCH) -lRocketWSW -lfreetype
 ifeq ($(USE_MINGW),YES)
 LDFLAGS_ROCKET+=-lzstat
 endif
@@ -646,14 +646,14 @@ clean-ui:
 
 $(LIBROCKET_LIB):
 	@echo "> * Building Rocket library"
-	@CXX="$(CXX)" AR=$(AR) RANLIB=$(RANLIB) CXXFLAGS="$(CFLAGS)" DEBUG_BUILD=$(DEBUG_BUILD) USE_MINGW=$(USE_MINGW) $(MAKE) -C $(LIBROCKET_DIR) -f $(LIBROCKET_MAKEFILE) DEBUG_BUILD=$(DEBUG_BUILD)
+	@CXX="$(CXX)" AR=$(AR) RANLIB=$(RANLIB) CXXFLAGS="$(CFLAGS)" DEBUG_BUILD=$(DEBUG_BUILD) USE_MINGW=$(USE_MINGW) ARCH=$(ARCH) $(MAKE) -C $(LIBROCKET_DIR) -f $(LIBROCKET_MAKEFILE) DEBUG_BUILD=$(DEBUG_BUILD)
 	@echo "> * Done building RocketCore library."
 	@echo "> *********************************************************"
 	@echo "> * Continuing ui building..."
 
 clean-librocket:
 	@echo "  > Removing librocket objects" && \
-	CXX="$(CXX)" $(MAKE) -C $(LIBROCKET_DIR) -f $(LIBROCKET_MAKEFILE) clean
+	CXX="$(CXX)" ARCH=$(ARCH) $(MAKE) -C $(LIBROCKET_DIR) -f $(LIBROCKET_MAKEFILE) clean
 endif
 
 ifeq ($(BUILD_IRC),YES)
