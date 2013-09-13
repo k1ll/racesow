@@ -27,7 +27,7 @@ version:
 	$(DOC_DIRECTORY)/$(DOXYGEN_FILE)
 	
 gametype:
-	cd $(RACESOW_DIRECTORY); zip -r rs_gametype$(SIMPLE_VERSION_NUMBER)pure progs configs
+	cd $(RACESOW_DIRECTORY); zip -r rs_gametype$(SIMPLE_VERSION_NUMBER)pure progs
 	mv $(RACESOW_DIRECTORY)/rs_gametype$(SIMPLE_VERSION_NUMBER)pure.zip rs_gametype$(SIMPLE_VERSION_NUMBER)pure.pk3
 
 data:
